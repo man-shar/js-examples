@@ -4,7 +4,7 @@ What the files do:
 
 ## alternate-distribution.js
 
-An "alternating" rectangular grid. Where each cell sits in the gap between the two above it. A kind of layout. Takes in parameters like cells per row, height, width, padding, etc. and returns x and y coordinates which are the top left corners of each "cell". It also returns the x and y extent of the layout.
+An "alternating" rectangular grid. Where each cell sits in the gap between the two above it. Takes in parameters like cells per row, height, width, padding, etc. and returns x and y coordinates which are the top left corners of each "cell". It also returns the x and y extent of the layout.
 
    <img src="alternating.png" alt="drawing" width="100"/>
 
