@@ -1,6 +1,6 @@
-import layout from './layout';
-import { pickNRandom, mobileCheck } from './util';
-import { cache } from './cache-neighbours';
+import layout from "./layout";
+import { pickNRandom, mobileCheck } from "./util";
+import { cache } from "./cache-neighbours";
 
 // import neighbours from './cache-neighbours';
 
@@ -113,7 +113,7 @@ function herdSim({
   var agents = [];
 
   function setup({
-    layoutType = 'rectGrid',
+    layoutType = "rectGrid",
     perRow,
     xOffset,
     yOffsetPerRow,
@@ -153,14 +153,14 @@ function herdSim({
       var w = people.extentX[1] + xOffset;
       var h = people.extentY[1] + 2 * xOffset;
       var scale = window.devicePixelRatio;
-      ctx.canvas.style.width = w + 'px';
-      ctx.canvas.style.height = h + 'px';
+      ctx.canvas.style.width = w + "px";
+      ctx.canvas.style.height = h + "px";
 
       ctx.canvas.width = w * scale;
       ctx.canvas.height = h * scale;
 
       ctx.scale(scale, scale);
-      ctx.strokeStyle = '#212121';
+      ctx.strokeStyle = "#212121";
 
       ctx.lineWidth = phone ? 0.1 : 0.4;
     }
@@ -252,7 +252,7 @@ function herdSim({
         for (let colNum = 0; colNum < row.length; colNum++) {
           var cell = row[colNum];
           // everyone is susceptible
-          cell.state = 'S';
+          cell.state = "S";
           cell.infectedDuration = 0;
           cell.neighboursInfected = 0;
           cell.generation = Infinity;
@@ -345,7 +345,7 @@ function herdSim({
         const cell = people.coords[Math.floor(d / perRow)][d % perRow];
         nI++;
         nS--;
-        cell.state = 'I';
+        cell.state = "I";
         cell.infectedDuration = 0;
         cell.generation = 1;
         agents.push(cell);
@@ -356,7 +356,7 @@ function herdSim({
         const cell = people.coords[Math.floor(d / perRow)][d % perRow];
         nV++;
         nS--;
-        cell.state = 'V';
+        cell.state = "V";
         cell.immune = true;
         vaccinateEvent(cell);
       });
@@ -379,7 +379,7 @@ function herdSim({
           const cell = people.coords[Math.floor(d / perRow)][d % perRow];
           nV++;
           nS--;
-          cell.state = 'V';
+          cell.state = "V";
           cell.special = cat;
           cell.immune = true;
           vaccinateEvent(cell, cat);
@@ -461,7 +461,7 @@ function herdSim({
       const cell = agents[i];
 
       // if (cell.state === 'V' || cell.state === 'R') continue;
-      if (cell.state === 'I' && cell.generation <= currentGeneration) {
+      if (cell.state === "I" && cell.generation <= currentGeneration) {
         // infect neighbours based on transmissibility
         // if (cell.neighbours.filter((d) => d.state === 'S').length === 8) {
         //   cellsForR0.push(cell);
@@ -470,88 +470,48 @@ function herdSim({
         var neighbour;
 
         // either probability method
-        if (!maintainR0) {
-          for (let j = 0; j < cell.neighbours.length; j++) {
-            neighbour = cell.neighbours[j];
-            if (neighbour === undefined) continue;
-            // if susceptible comes in contact with infected and random is higher than transmissibility
-            // make it infected
-            // colour the corresponding cell
+        // if (!maintainR0) {
+        for (let j = 0; j < cell.neighbours.length; j++) {
+          neighbour = cell.neighbours[j];
+          if (neighbour === undefined) continue;
+          // if susceptible comes in contact with infected and random is higher than transmissibility
+          // make it infected
+          // colour the corresponding cell
 
-            if (neighbour.state === 'S') {
-              cell.susceptibleContact += 1;
-              if (Math.random() < tao) {
-                // if (neighbour.state === 'S' && neighbour.susceptible) {
-                neighbour.state = 'I';
-                nI++;
-                nS--;
-                infectEvent(neighbour, true);
-                cell.neighboursInfected++;
-                neighbour.generation = cell.generation + 1;
-                totalNeighboursInfected++;
-                agents.push(neighbour);
-              }
-            }
-            // vaccine efficacy
-            // vaccine works 70% (default vacEff) of time.
-            // so Math.random > 0.7 should infect
-            // is equivalent to saying Math.random < 1 - 0.7 should infect
-            if (neighbour.state === 'V' && !neighbour.immune) {
-              // if (Math.random() < vacProbPerDay) {
-              if (Math.random() < tao) {
-                neighbour.state = 'I';
-                nI++;
-                nV--;
-                infectEvent(neighbour, true);
-                cell.neighboursInfected++;
-                neighbour.generation = cell.generation + 1;
-                totalNeighboursInfected++;
-                agents.push(neighbour);
-              }
-            }
-          }
-        } else {
-          // PLEASE DON'T USE THIS METHOD. IT WAS VERY EXPERIMENTAL-ISH AND, AS IT TURNS OUT, IS SHIT.
-          // or maintain R0 method
-          // select the people you want to infect
-          // index of susceptible neighbours
-          var susceptibleNeighbours = cell.neighbours
-            .map((d, i) => [d.state, i])
-            .filter((d) => d[0] === 'S')
-            .map((d) => d[1]);
-
-          if (!cell.oneRoundOfInfectionCompleted) {
-            cellsOneRoundOfInfectionCompleted += 1;
-            cell.oneRoundOfInfectionCompleted = true;
-          }
-
-          // from the susceptible indexes, select the ones to infect
-          // if r0 > number of susceptible neihbours, infect all
-          var neighboursToInfect =
-            r0 > susceptibleNeighbours.length
-              ? susceptibleNeighbours
-              : updateR0(susceptibleNeighbours);
-
-          neighboursToInfect.forEach((susIndex) => {
-            neighbour = cell.neighbours[susIndex];
+          if (neighbour.state === "S") {
             cell.susceptibleContact += 1;
-            if (!neighbour) {
-              throw new Error('Something wrong: neighbour not defined.');
+            if (Math.random() < tao) {
+              // if (neighbour.state === 'S' && neighbour.susceptible) {
+              neighbour.state = "I";
+              nI++;
+              nS--;
+              infectEvent(neighbour, true);
+              cell.neighboursInfected++;
+              neighbour.generation = cell.generation + 1;
+              totalNeighboursInfected++;
+              agents.push(neighbour);
             }
-            neighbour.state = 'I';
-            nI++;
-            nS--;
-            infectEvent(neighbour, true);
-            cell.neighboursInfected++;
-            if (neighbour.generation === 1) {
-              throw new Error(
-                'Something wrong: First generation infection showing up in suceptible cases.'
-              );
+          }
+          // vaccine efficacy
+          // vaccine works 70% (default vacEff) of time.
+          // so Math.random > 0.7 should infect
+          // is equivalent to saying Math.random < 1 - 0.7 should infect
+          if (neighbour.state === "V" && !neighbour.immune) {
+            // if (Math.random() < vacProbPerDay) {
+            if (Math.random() < tao) {
+              neighbour.state = "I";
+              nI++;
+              nV--;
+              infectEvent(neighbour, true);
+              cell.neighboursInfected++;
+              neighbour.generation = cell.generation + 1;
+              totalNeighboursInfected++;
+              agents.push(neighbour);
             }
-            neighbour.generation = cell.generation + 1;
-            totalNeighboursInfected++;
-          });
+          }
         }
+        // } else {
+        // }
 
         // increment the infectedDuration
         cell.infectedDuration++;
@@ -564,7 +524,7 @@ function herdSim({
 
           // if cured immunity flag is true (default), the just turn into inert cell
           if (curedImmunity) {
-            cell.state = 'R';
+            cell.state = "R";
             removeEvent(cell);
             nR++;
             // var t = agents.splice(i, 1);
@@ -583,11 +543,11 @@ function herdSim({
             // then they can decide if they want to get vaccinated or not.
             // otherwise back to susceptible
             if (Math.random() < v) {
-              cell.state = 'R';
+              cell.state = "R";
               removeEvent(cell);
               nR++;
             } else {
-              cell.state = 'S';
+              cell.state = "S";
               susceptibleEvent(cell);
               nS++;
             }
@@ -666,13 +626,13 @@ function herdSim({
       const row = people.coords[rowNum];
       for (let colNum = 0; colNum < row.length; colNum++) {
         const cell = row[colNum];
-        if (cell.state === 'I') {
+        if (cell.state === "I") {
           infectEvent(cell);
         }
-        if (cell.state === 'V') {
+        if (cell.state === "V") {
           vaccinateEvent(cell, cell.special);
         }
-        if (cell.state === 'S') {
+        if (cell.state === "S") {
           susceptibleEvent(cell);
         }
       }

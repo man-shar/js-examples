@@ -5,11 +5,13 @@ What the files do:
 
 ## layout.js
 
-Inert middleware just to call the possible layouts. Currently only has a rectangular grid. A layout returns x and y coordinates which are the top left corners of each "cell". It also returns the x and y extent of the layout.
+Inert middleware just to call the possible layouts. Currently only has a rectangular grid. A layout in general takes in parameters like cells per row, height, width, padding, etc. and returns x and y coordinates which are the top left corners of each "cell". It also returns the x and y extent of the layout.
 
 ## rect-grid.js
 
-A normal rectangular grid. It can also be an "alternating" style grid where each row sits in the "gaps" of the one above it. As above, returns x and y coordinates of the square/rectangular "cells".
+A normal rectangular grid. A kind of layout. It can also be an "alternating" style grid where each row sits in the "gaps" of the one above it. As above, returns x and y coordinates of the square/rectangular "cells".
+
+Now wondering if layout and rect-grid should really be written with classes?
 
 ## cache-neighbours.js
 
@@ -20,9 +22,9 @@ This is a handy function when you have a number of grids and models running simu
    <img src="neighbours.png" alt="drawing" width="100"/>
 
 3. So to transform the 2D row and column number to a 1D index in the cell array, we can do some basic math. But that gets really expensive once you want to run thousands of them at the same time and animate a canvas.
-4. So we cache the neighbour indexes for each possible grid configuration (n rows x m columns) we need. So we need to do computation only once.
+4. So we cache the neighbour indexes for each possible grid configuration (n rows x m columns) we need. So we need to do computation only once and can reuse later.
 5. Good thing about this is it can even be done preemptively before the user gets to any of the graphics.
-6. I just add it to window. Not great practice. Ideally you'd want to have some sort of API to it that maintains closure on the object.
+6. I just add it to the window object. Not great practice. Ideally you'd want to have some sort of API to it that maintains closure on the object.
 
 ## herd-sim.js
 
@@ -31,7 +33,7 @@ It takes a layout from layout.js (currently only works with a rectangular grid),
 
 The API exposes a bunch of functions:
 
-1. setup:  
+1. **setup**  
    Sets up the sim.
 
    - Randomly initialises nI number of infected, nV number of vaccinated and all others are susceptible. It can also do initialisations at predefined indexes if you pass the model a "initials" object.
@@ -40,17 +42,17 @@ The API exposes a bunch of functions:
    - Sets up "long range connections": By default, 1/8th of the cells have an extra random neighbour that's not among the 8 surrounding it. These are super important when trying to get closer to a "mixed population" model using a rectangular lattice model.
    - Also sets up poor-vaccinations among the vaccinated individuals. Since vaccine efficacy is ~70%, this is 30% of the nV above.
 
-2. tickSim:  
+2. **tickSim**  
    Runs the sim once. Which amounts to looping through every currently infected cell, going through it's neighbours and infecting them based on transmission probability.
 
-3. tickCount:  
+3. **tickCount**  
    Returns the current tick count. Useful helper function while developing.
 
-4. reset:  
+4. **reset**  
    Resets the sim! Kind of runs setup again. But in it's own way: If new parameters are passed to reset, it initialises using those instead. Otherwise, same as before.
 
-5. log:  
-   Logs formatted current stats of the model to the console:
+5. **log**  
+   Logs the _current_ stats of the model to the console:
 
    - Population
    - Vaccination
@@ -60,5 +62,5 @@ The API exposes a bunch of functions:
    - Vaccinated
    - Sanity: this checks if above numbers add up equal to population. Again, important while developing.
 
-6. fullRun:  
+6. **fullRun**  
    If you just want to run the simulation to completeness (no more infected). It runs the above _tick_ function repeatedly. Useful if you just want to look at stats at the end and don't need to animate stuff based on the ticks.
