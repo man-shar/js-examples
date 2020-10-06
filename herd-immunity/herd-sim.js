@@ -5,7 +5,7 @@ import { cache } from "./cache-neighbours";
 // import neighbours from './cache-neighbours';
 
 // https://web.stanford.edu/~jhj1/teachingdocs/Jones-on-R0.pdf
-// https://en.wikipedia.org/wiki/Mathematical_modelling_of_infectious_disease#Modelling_epidemics
+// https://www.wikiwand.com/en/Mathematical_modelling_of_infectious_disease#/The_SIR_model
 // c is average rate of contact between suspected and infected
 // d is the duration of infectiousness.
 // i is the proportion of people infected initially

@@ -1,5 +1,4 @@
-This is a bunch
-of javascript I wrote which basically forms the backbone of this story: https://tmsnrt.rs/3hiJKGS
+This is a bunch of javascript I wrote which basically forms the backbone of this story: https://tmsnrt.rs/3hiJKGS
 
 What the files do:
 
@@ -29,7 +28,7 @@ This is a handy function when you have a number of grids and models running simu
 ## herd-sim.js
 
 This is the heart of the entire project: the model itself.
-It takes a layout from layout.js (currently only works with a rectangular grid), and sets up the SIR model on that layout.
+It takes a layout from layout.js (currently only works with a rectangular grid), and sets up the [SIR](https://www.wikiwand.com/en/Mathematical_modelling_of_infectious_disease#/The_SIR_model) model on that layout.
 
 The API exposes a bunch of functions:
 

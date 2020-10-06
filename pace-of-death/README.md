@@ -1,5 +1,4 @@
-This is a bunch
-of javascript I wrote which basically forms the backbone of this story: https://tmsnrt.rs/2VqS5PS
+Code I wrote for all the graphics on this story: https://tmsnrt.rs/2VqS5PS
 
 What the files do:
 
