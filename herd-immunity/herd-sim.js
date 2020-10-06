@@ -82,11 +82,6 @@ function herdSim({
 
   calculateConstants();
 
-  // tao = r0 / (s * c) / d;
-  //
-  // console.log(tao, r0 / (s * c) / d);
-  // tao = 1;
-
   // n = number of...
   // nI: number of infected
   // nS: number of susceptible
@@ -198,26 +193,7 @@ function herdSim({
         initialVaccinated = pickNRandom(pop, Math.floor(v * pop), toSkip);
       }
 
-      // console.log(initialVaccinated);
-
-      // console.log(
-      //   initialInfected
-      //     .map((d) => initialVaccinated.indexOf(d))
-      //     .filter((d) => d !== -1)
-      // );
-
-      // try {
       toSkip = toSkip.concat(initialVaccinated);
-      // } catch (e) {
-      //   console.log(e);
-      //   console.log(
-      //     initialVaccinated,
-      //     toSkip,
-      //     initialVaccinated.length,
-      //     toSkip.length
-      //   );
-      //   debugger;
-      // }
 
       if (initials.spl) {
         specialCatsInitials = initials.spl;
@@ -266,52 +242,7 @@ function herdSim({
           for (let k = 0; k < ref.length; k++) {
             cell.neighbours[k] = people.coords[ref[k][0]][ref[k][1]];
           }
-          // for (
-          //   let k = Math.max(0, rowNum - 1);
-          //   k <= Math.min(people.coords.length - 1, rowNum + 1);
-          //   k++
-          // ) {
-          //   for (
-          //     let l = Math.max(0, colNum - 1);
-          //     l <= Math.min(row.length - 1, colNum + 1);
-          //     l++
-          //   ) {
-          //     if ((k !== rowNum || l !== colNum) && people.coords[k][l]) {
-          //       cell.neighbours[cell.neighbours.length] = people.coords[k][l];
-          //       // cell.neighbours.push(people.coords[k][l]);
-          //     }
-          //   }
-          // }
           susceptibleEvent(cell);
-          // cell.neighbours = [
-          //   [rowNum - 1, colNum - 1, (rowNum - 1) * perRow + colNum - 1],
-          //   [rowNum - 1, colNum, (rowNum - 1) * perRow + colNum],
-          //   [rowNum - 1, colNum + 1, (rowNum - 1) * perRow + colNum + 1],
-          //   [rowNum, colNum - 1, rowNum * perRow + colNum - 1],
-          //   [rowNum, colNum + 1, rowNum * perRow + colNum + 1],
-          //   [rowNum + 1, colNum - 1, (rowNum + 1) * perRow + colNum - 1],
-          //   [rowNum + 1, colNum, (rowNum + 1) * perRow + colNum],
-          //   [rowNum + 1, colNum + 1, (rowNum + 1) * perRow + colNum + 1],
-          // ];
-
-          // if (
-          //   rowNum === 0 ||
-          //   rowNum === people.coords.length - 1 ||
-          //   colNum === 0 ||
-          //   colNum === row.length - 1
-          // ) {
-          //   cell.neighbours = cell.neighbours.filter((d) => {
-          //     return (
-          //       d[0] >= 0 &&
-          //       d[1] >= 0 &&
-          //       people.coords[d[0]] &&
-          //       people.coords[d[0]][d[1]]
-          //     );
-          //   });
-          // }
-          // cell.neighbours = cell.neighbours.map((d) => {
-          //   return people.coords[d[0]][d[1]];
-          // });
         }
       }
 
@@ -320,12 +251,9 @@ function herdSim({
       }
 
       if (longRangeConnections && longRangeFrac !== 0) {
-        // console.log(longRangeFrac);
         // add a long range neighbours to 1/6th of the cells
         var longRange = pickNRandom(pop, Math.floor(pop / longRangeFrac));
         // for each of these cells, add a long range neighbour
-        // console.log(longRange.length, pop, pop / longRange.length);
-        // console.log(`1/${longRangeFrac}`, longRange.length);
         longRange.forEach((d) => {
           var cell = people.coords[Math.floor(d / perRow)][d % perRow];
 
@@ -402,19 +330,12 @@ function herdSim({
     // find number needed to get closest to r0
     var runningDelta = Infinity;
     var count = 0;
-    // console.log(
-    //   totalNeighboursInfected,
-    //   cellsOneRoundOfInfectionCompleted,
-    //   runningR0,
-    //   nI
-    // );
     for (let i = 0; i < indexList.length; i++) {
       var diff = Math.abs(
         (totalNeighboursInfected + i + 1) / cellsOneRoundOfInfectionCompleted -
           r0
       );
       if (diff <= runningDelta) {
-        // console.log(count, 'diff: ', diff, 'runningDelta: ', runningDelta);
         count = i + 1;
         runningDelta = diff;
       } else {
@@ -439,11 +360,6 @@ function herdSim({
   function tickSim(
     { repeat = false, cb = null } = { repeat: false, cb: null }
   ) {
-    // console.log(((nI + nR) * 100) / pop);
-    // if (nI === 0 && nS === 0) {
-    //   clearInterval(tickInterval);
-    // }
-
     if (nI === 0 && nR !== 0) {
       finishEvent();
       if (cb !== null) {
@@ -452,25 +368,15 @@ function herdSim({
       return true;
     }
 
-    // for (let rowNum = 0; rowNum < people.coords.length; rowNum++) {
-    //   const row = people.coords[rowNum];
-    //   for (let colNum = 0; colNum < row.length; colNum++) {
-    //     const cell = row[colNum];
-
     for (let i = agents.length - 1; i >= 0; i--) {
       const cell = agents[i];
 
-      // if (cell.state === 'V' || cell.state === 'R') continue;
       if (cell.state === "I" && cell.generation <= currentGeneration) {
         // infect neighbours based on transmissibility
-        // if (cell.neighbours.filter((d) => d.state === 'S').length === 8) {
-        //   cellsForR0.push(cell);
-        // }
 
         var neighbour;
 
         // either probability method
-        // if (!maintainR0) {
         for (let j = 0; j < cell.neighbours.length; j++) {
           neighbour = cell.neighbours[j];
           if (neighbour === undefined) continue;
@@ -510,8 +416,6 @@ function herdSim({
             }
           }
         }
-        // } else {
-        // }
 
         // increment the infectedDuration
         cell.infectedDuration++;
@@ -562,27 +466,6 @@ function herdSim({
     if (cb !== null) {
       cb(nI, nR, ticks);
     }
-
-    // some random code I tried writing to calculate the average R0 when using the "maintain R0" method.
-    // IGNORE. DON'T USE.
-    // s = nS / pop;
-    // console.log(tao);
-    // tao = r0 / (s * c) / d;
-    // console.log(totalNeighboursInfected, cellsOneRoundOfInfectionCompleted);
-    // if (ticks === 120) {
-    //   cellsForR0 = [];
-    //   var x = 0;
-    //   for (let rowNum = 0; rowNum < people.coords.length; rowNum++) {
-    //     const row = people.coords[rowNum];
-    //     for (let colNum = 0; colNum < row.length; colNum++) {
-    //       const cell = row[colNum];
-    //       if (cell.generation === 1) {
-    //         cellsForR0.push(cell);
-    //         x += cell.neighboursInfected;
-    //       }
-    //     }
-    //   }
-    // }
   }
 
   function reset(
@@ -619,8 +502,6 @@ function herdSim({
     }
 
     calculateConstants();
-    // maintainR0 = !maintainR0;
-    // console.log(initials.spl);
     initialise(refreshInitials);
     for (let rowNum = 0; rowNum < people.coords.length; rowNum++) {
       const row = people.coords[rowNum];
@@ -653,8 +534,6 @@ function herdSim({
     Vaccinated: ${nV}, ${(nV * 100) / pop}%
     Sanity: ${nS + nI + nR + nV}
     `;
-
-    // return `${pop},${v},${nI},${nR},${nS},${nV},${nS + nI + nR + nV}`;
 
     return {
       pop,

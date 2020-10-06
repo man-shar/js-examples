@@ -9,7 +9,7 @@ An "alternating" rectangular grid. Where each cell sits in the gap between the t
 
    <img src="alternating.png" alt="drawing" width="100"/>
 
-# top-graphic.js
+## top-graphic.js
 
 This is the main graphic on the page.
 

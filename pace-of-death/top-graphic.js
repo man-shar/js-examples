@@ -4,7 +4,7 @@ import { throttle } from "./util";
 var ctr = document.querySelector(".main");
 var h = ctr.offsetHeight - window.innerHeight;
 var currentDeathCount = 0;
-// var totalDeaths = (24 * 3600) / 18;
+
 var totalDeaths = 5437;
 
 var fmt = d3.format(",");
@@ -99,10 +99,7 @@ img.then((img) => {
     ctx.mozImageSmoothingEnabled = false;
     ctx.webkitImageSmoothingEnabled = false;
 
-    // d3.select('.clock').classed('hide', false);
     d3.select(".clock").classed("show", true);
-
-    // ctx.scale(1, fullHeight / originalHeight);
 
     var m = (originalWidth * 0.05) / 2;
 
@@ -118,13 +115,6 @@ img.then((img) => {
     var scaledImgH = round(img.height * imgScale);
 
     var currentY = 0;
-
-    // var originalW = 20;
-    // var originalH = 53.61;
-
-    // function drawPerson(ctx, x, y, w, h) {
-    //   ctx.arc()
-    // }
 
     d3.csv(coordFile).then((d) => {
       var extent = d3.extent(d, (d2) => +d2.x);
@@ -200,7 +190,6 @@ img.then((img) => {
       // yeah.. i wrote this.. manually.
       // rendering an svg icon in canvas was reaaaal slow and blurry.
       function drawShape(x, y, w, h, black = false) {
-        // console.log('Drawing');
         function scaleY(y) {
           return (y * h) / templateH;
         }
@@ -334,7 +323,6 @@ img.then((img) => {
 
       function handleScroll(ev) {
         var pct = (window.scrollY - ctr.offsetTop) / h;
-        // if (pct > 1.1) return;
 
         pct = pct < 0 ? 0 : pct;
 
@@ -355,8 +343,6 @@ img.then((img) => {
         document.querySelector(".minute").style.transform =
           "rotate(" + pct * 24 * 2 * Math.PI + "rad)";
 
-        // console.log('ran', newDeathCount);
-
         // if required height doesn't match current height of the canvas and is greater than the original height of canvas, then change
 
         var newHeight =
@@ -365,12 +351,6 @@ img.then((img) => {
           1;
 
         if (newHeight > originalHeight) {
-          // if (Math.abs(newBottom - currentBottom) > 5) {
-          //   document.querySelector('#graphic-container > div').style.bottom =
-          //     newBottom + 'px';
-          //   currentBottom = newBottom;
-          // }
-
           // new people
           if (newHeight !== canvas.height) {
             canvas.height = newHeight;
@@ -385,40 +365,30 @@ img.then((img) => {
               i++
             ) {
               drawShape(data[i].x, data[i].y, scaledImgW, scaledImgH);
-              // ctx.drawImage(img, data[i].x, data[i].y, scaledImgW, scaledImgH);
             }
           }
-          // ctx.scale(1, fullHeight / newHeight);
         } else {
           //  if it's less we should just reset bottom to 0px
           if (canvas.height !== originalHeight) {
-            // document.querySelector('#graphic-container > div').style.bottom =
-            //   '0px';
-            // currentBottom = 0;
             canvas.height = originalHeight;
             canvas.style.height = originalHeight + "px";
             for (let i = 0; i < currentDeathCount; i++) {
               drawShape(data[i].x, data[i].y, scaledImgW, scaledImgH);
-              // ctx.drawImage(img, data[i].x, data[i].y, scaledImgW, scaledImgH);
             }
           }
         }
 
         if (newDeathCount > currentDeathCount) {
-          // d3.select('#redrawing').text(Math.random());
           if (!hourLabelVisible && newDeathCount >= 1) {
             d3.select("#hour-label-phone .hour-label").classed("show", true);
             d3.select("#hour-label-phone .hour-label").classed("hide", false);
             hourLabelVisible = true;
           }
 
-          // for (var i = 0; i < newDeathCount - currentDeathCount; i++) {
           for (var i = currentDeathCount; i < newDeathCount; i++) {
-            // ctx.drawImage(img, data[i].x, data[i].y, scaledImgW, scaledImgH);
             drawShape(data[i].x, data[i].y, scaledImgW, scaledImgH);
           }
         } else if (newDeathCount < currentDeathCount) {
-          // d3.select('#redrawing').text(Math.random());
           if (hourLabelVisible && newDeathCount <= 1) {
             d3.select("#hour-label-phone .hour-label").classed("show", false);
             d3.select("#hour-label-phone .hour-label").classed("hide", true);
@@ -430,25 +400,15 @@ img.then((img) => {
           // fill with black icon
           for (let i = newDeathCount; i < currentDeathCount; i++) {
             drawShape(data[i].x, data[i].y, scaledImgW, scaledImgH, true);
-            // ctx.drawImage(
-            //   imgBlack,
-            //   data[i].x,
-            //   data[i].y,
-            //   scaledImgW,
-            //   scaledImgH
-            // );
           }
 
           // draw new people
           for (let i = lo; i < newDeathCount; i++) {
-            // ctx.drawImage(img, data[i].x, data[i].y, scaledImgW, scaledImgH);
             drawShape(data[i].x, data[i].y, scaledImgW, scaledImgH);
           }
         }
 
         currentDeathCount = newDeathCount;
-        // document.querySelector('.second').style.transform =
-        //   'rotate(' + pct * 48 * 60 * Math.PI + 'rad)';
       }
 
       window.addEventListener("scroll", throttle(handleScroll, 20));
