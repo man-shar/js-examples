@@ -1,4 +1,4 @@
-Some examples of javascript I've written in the past for some of my stories. More descriptiove Readmes about each file and specific functions is inside each folder.
+Some examples of javascript I've written in the past for some of my stories. Descriptiove Readmes about each file and specific functions are inside each folder.
 
 ## herd-immunity
 
