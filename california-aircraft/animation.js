@@ -341,14 +341,18 @@ function makeChart(data, world) {
       }
       var dashOffset = 0;
 
+      // add up everything till here
       for (let k = 0; k < previousTimeStampIndex; k++) {
         dashOffset += segLengths[k];
       }
+      // find the percentage of time interval passed from last timestamp to current.
+      // so if it was 12:09 to 12:11 and it's 12:10 currently, 50% time has passed.
       var pctTimePassedSinceLastTimeStamp =
         (timePassed - +allTripTimeStamps[previousTimeStampIndex]) /
         (+allTripTimeStamps[previousTimeStampIndex + 1] -
           +allTripTimeStamps[previousTimeStampIndex]);
 
+      // add that percent of the next segment length
       dashOffset +=
         segLengths[previousTimeStampIndex] * pctTimePassedSinceLastTimeStamp;
 
