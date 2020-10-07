@@ -2,7 +2,7 @@ Some examples of javascript I've written in the past for some of my stories. Des
 
 ## react-charting-tool
 
-This is a charting tool I made in React back in 2018 for my Bachelor's Thesis. It's based on Bret Victor's dynamic visualization demo and tried to explore how charts could be made using via drawing.
+This is a charting tool I made in React back in 2018 for my Bachelor's Thesis. It's based on [Bret Victor's talk on "Drawing Dynamic Visualization"](http://worrydream.com/DrawingDynamicVisualizationsTalkAddendum/) demo and tried to explore how charts could be made using via drawing.
 
 It uses React for the front end and svg rendering and [Redux](https://github.com/reduxjs/react-redux) for state management.
 
