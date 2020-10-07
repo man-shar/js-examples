@@ -51,25 +51,25 @@ yarn start
 To actually make a chart with it:
 
 - Take the [avg_all.csv]() file from src/Things/Data/ and drag it to the data tab. You'll see it populates the tabs with your data.  
-  <img src="data-tab-blank.png" alt="drawing" width="300"/>  
-  <img src="data-tab-with-data.png" alt="drawing" width="300"/>
+  <img src="./readme-files/data-tab-blank.png" alt="drawing" width="300"/>  
+  <img src="./readme-files/data-tab-with-data.png" alt="drawing" width="300"/>
 
 - Drag index and s04 column headers to the x and y axis respectively like so:  
-  <img src="add-axis.gif" alt="drawing" width="300"/>
+  <img src="./readme-files/add-axis.gif" alt="drawing" width="300"/>
 
 - Now that your data and axes are setup, we can draw a chart using this. Click and drag your mouse on the canvas to draw a rectangle.
-  <img src="draw-rect.gif" alt="drawing" width="300"/>
+  <img src="./readme-files/draw-rect.gif" alt="drawing" width="300"/>
 
 - Now in the attribute tab on the right, drag the index and s04 column headers to the rectangles "Base X" and "Height" attributes. Also make the Base Y 0. like so:
 
-<img src="rect-attr-1.gif" alt="drawing" width="300"/>
+<img src="./readme-files/rect-attr-1.gif" alt="drawing" width="300"/>
 
 - For the width, delete the existing "Width" attribute and drag the "Chart Width" attribute to the "Width" attribute of the rectangle. then type "/100" after it to fit 100 rectangles on the canvas. Notice how everything updates as you do these steps.
 
-<img src="rect-attr-2.gif" alt="drawing" width="300"/>
+<img src="./readme-files/rect-attr-2.gif" alt="drawing" width="300"/>
 
 - That's it! All you gotta do now is press "Ctrl + L" (Cmd won't work on Macs unfortunately). And the tool will loop over every row and repeat what you just did for one rectangle for every row.  
-  <img src="chart-final.png" alt="drawing" width="300"/>
+  <img src="./readme-files/chart-final.png" alt="drawing" width="300"/>
 
 `Warning`
 
