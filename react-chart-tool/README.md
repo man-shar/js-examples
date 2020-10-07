@@ -64,7 +64,7 @@ To actually make a chart with it:
 
 <img src="rect-attr-1.gif" alt="drawing" width="300"/>
 
-- For the width, delete the existinng "Width" attribute and drag the "Chart Width" attribute to the "Width" attribute of the rectangle. then type "/100" after it to fit 100 rectangles on the canvas. Notice how everything updates as you do these steps.
+- For the width, delete the existing "Width" attribute and drag the "Chart Width" attribute to the "Width" attribute of the rectangle. then type "/100" after it to fit 100 rectangles on the canvas. Notice how everything updates as you do these steps.
 
 <img src="rect-attr-2.gif" alt="drawing" width="300"/>
 
