@@ -1,0 +1,23 @@
+.anchor {
+  fill: orange;
+  fill-opacity: 0.7;
+  stroke: orange;
+}
+
+.shape {
+  pointer-events: all;
+}
+
+
+.shape:hover {
+  fill: #fccc66 !important;
+}
+
+text {
+  stroke: none;
+}
+
+/* axis */
+.left text, .right text{
+  transform: scale(1, -1);
+}

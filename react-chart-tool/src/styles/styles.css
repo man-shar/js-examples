@@ -1,0 +1,287 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+
+body {
+  margin: 0;
+  padding: 0;
+  color: #304352;
+  font-size: 12px;
+}
+
+* {
+  font-family: 'PT Sans', sans-serif;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box; /* Firefox, other Gecko */ 
+  box-sizing: border-box; /* Opera/IE 8+ */ 
+}
+
+#main-container {
+  margin: 0 auto;
+  display: flex;
+  height: 100%;
+}
+
+#chart-container, #things {
+  font-size: 12px;
+  overflow-x: auto;
+  vertical-align:top;
+}
+
+#chart-container {
+  background-color: white;
+  min-width: 300px;
+  position: relative;
+  width: 100%;
+}
+
+#things {
+  min-width: 400px;
+  max-width: 400px;
+  /* position: absolute; */
+  flex-grow: 1;
+  border-left: 0.1em solid #ddd;
+  background-color: #fff;
+  right: 0;
+  top: 0;
+  height: 100%;
+  
+}
+
+/* .things-label {
+  background-color: #e1e0e0;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  height: 20px;
+  position: sticky;
+  left: 0;
+  top: 0;
+  box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  z-index: 10;
+}
+ */
+
+.things-label {
+  background-color: #556270;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  height: 20px;
+  position: sticky;
+  left: 0;
+  top: 0;
+  z-index: 10;
+}
+
+#data-drop-container, #attribute-container {
+  
+}
+
+#data-drop-container > #data-drop-placeholder-text {
+  cursor: pointer;
+  opacity: 0.7;
+  text-align: center;
+}
+
+#data-drop-container > #data-drop-placeholder-text:hover {
+  opacity: 1;
+}
+
+#data-drop-container {
+  height: 20%;
+  overflow: auto;
+}
+
+#data-drop-placeholder-text {
+  font-size: 14px;
+  font-style: italic;
+}
+
+#attribute-container {
+  height: 80%;
+  overflow: auto;
+}
+
+.column-name {
+  cursor: pointer;
+  color: white;
+  background-color: #e1e0e0;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.AttributeRow {
+  display: flex;
+  padding: 0em 0.5em;
+  align-items: start;
+}
+
+.AttributeContainer {
+  text-align: left;
+  padding: 0.2em 0.5em;
+  margin: 1em auto;
+  padding: 1em;
+  max-height: 175px;
+  overflow-y: scroll;
+  width: 80%;
+}
+
+.AttributeName, .codemirror-marker, .DataFlexColumnHeader {
+  width: 10em;
+  display: flex;
+  background-color: #e1e0e0;
+  border-radius: 10px;
+  padding: 0.2em 0.5em;
+  margin-right: 1em;
+  cursor: -webkit-grab;
+  cursor:-moz-grab;
+}
+
+.DataFlexColumnHeader {
+  width: 100%;
+}
+
+.codemirror-marker {
+  width: auto;
+  display: inline;
+  margin: 0em 0.2em;
+  /* vertical-align: middle; */
+}
+
+.AttributeName:active { 
+  cursor: -webkit-grabbing;
+  cursor:-moz-grabbing;
+}
+
+.AttributeExpression {
+  flex-grow: 1;
+}
+
+.AttributeExpressionEditable {
+  padding: 0.2em 0.5em;
+}
+
+.AttributeValue {
+  padding: 0.2em 0.5em;
+  color: #aaa;
+}
+
+.CodeMirror {
+  height: intrinsic;           /* Safari/WebKit uses a non-standard name */
+  height: -moz-max-content;    /* Firefox/Gecko */
+  height: -webkit-max-content; /* Chrome */
+}
+
+.AttributesSectionHeading {
+  text-align: center;
+  font-size: 1.2em;
+  color: #556270;
+  /* background-color: #556270; */
+  margin: 0.5em 0.5em;
+  border-top: 1px solid #ddd;
+/*   box-shadow: 0 6px 4px -4px rgba(0, 0, 0, 0.1); */
+}
+
+.EditableTextAttributeName {
+  display: inline-block;
+  cursor: text;
+}
+
+[contenteditable]:focus {
+  outline: 0px solid transparent;
+}
+
+.inherited-attribute {
+  opacity: 0.7;
+}
+
+.isHovered,.DataFlexColumnHeader:hover {
+  background-color: #556270;
+  color: #fff;
+}
+
+header
+{
+  font-family: 'Lobster', cursive;
+  text-align: center;
+  font-size: 25px;  
+}
+
+#info
+{
+  font-size: 18px;
+  color: #555;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+a{
+  color: #074E8C;
+}
+
+.scrollbar
+{
+  margin-left: 30px;
+  float: left;
+  height: 300px;
+  width: 65px;
+  background: #e1e0e0;
+  overflow-y: scroll;
+  margin-bottom: 25px;
+}
+
+.force-overflow
+{
+  min-height: 450px;
+}
+
+#wrapper
+{
+  text-align: center;
+  width: 500px;
+  margin: auto;
+}
+
+/* scrollbar style */
+*::-webkit-scrollbar-track
+{
+  /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); */
+  border-radius: 3px;
+  background-color: #e1e0e0;
+}
+
+*::-webkit-scrollbar
+{
+  width: 7px;
+  height: 7px;
+  background-color: #e1e0e0;
+}
+
+*::-webkit-scrollbar-thumb
+{
+  border-radius: 3px;
+  /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.6); */
+  background-color: #556270;
+}
+
+#ToolbarFlexContainer {
+  display: flex; /* I now declare this as a flex-container */
+  display: -webkit-flex; /* This is the Chrome notation */
+  position: absolute;
+  top: 1%;
+  left: 2%;
+}
+
+.ToolbarItemFlex {
+ /* Just some color and shape */
+  margin-right: 1em;
+  border-radius: 3px;
+}
+
+.activeToolbarItem {
+  font-weight: bold;
+}
+
+.toolbar-key {
+  display: inline-block;
+  margin-right: 0.6em;
+}

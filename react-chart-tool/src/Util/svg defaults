@@ -1,0 +1,63 @@
+writingMode$name: "writing-mode"
+writingMode$options: ["lr-tb","rl-tb","tb-rl","lr","rl","tb","inherit"]
+writingMode$value: "lr-tb"
+
+glyphOrientationVertical$name: "glyph-orientation-vertical"
+glyphOrientationVertical$options: ["auto","<angle>","inherit"]
+glyphOrientationVertical$value: "auto"
+
+glyphOrientationHorizontal$name: "glyph-orientation-horizontal"
+glyphOrientationHorizontal$options: ["<angle>","inherit"]
+glyphOrientationHorizontal$value: "0deg"
+
+direction$name: "direction"
+direction$options: ["ltr","rtl","inherit"]
+direction$value: "ltr"
+
+unicodeBidi$name: "unicode-bidi"
+unicodeBidi$options: ["normal","embed","bidi-override","inherit"]
+unicodeBidi$value: "normal"
+
+textAnchor$name: "text-anchor"
+textAnchor$options: ["start","middle","end","inherit"]
+textAnchor$value: "start"
+
+dominantBaseline$name: "dominant-baseline"
+dominantBaseline$options: ["auto","use-script","no-change","reset-size","ideographic","alphabetic","hanging","mathematical","central","middle","text-after-edge","text-before-edge","inherit"]
+dominantBaseline$value: "auto"
+
+alignmentBaseline$name: "alignment-baseline"
+alignmentBaseline$options: ["auto","baseline","before-edge","text-before-edge","middle","central","after-edge","text-after-edge","ideographic","alphabetic","hanging","mathematical","inherit"]
+alignmentBaseline$value: "auto"
+
+baselineShift$name: "baseline-shift"
+baselineShift$options: ["baseline","sub","super","<percentage>","<length>","inherit"]
+baselineShift$value: "baseline"
+
+fontStyle$name: "font-style"
+fontStyle$options: ["normal","italic","oblique","inherit"]
+fontStyle$value: "normal"
+
+fontVariant$name: "font-variant"
+fontVariant$options: ["normal","small-caps","inherit"]
+fontVariant$value: "normal"
+
+fontSizeAdjust$name: "font-size-adjust"
+fontSizeAdjust$options: ["<number>","none","inherit"]
+fontSizeAdjust$value: "none"
+
+kerning$name: "kerning"
+kerning$options: ["auto","<length>","inherit"]
+kerning$value: "auto"
+
+letterSpacing$name: "letter-spacing"
+letterSpacing$options: ["normal","<length>","inherit"]
+letterSpacing$value: "normal"
+
+wordSpacing$name: "word-spacing"
+wordSpacing$options: ["normal","<length>","inherit"]
+wordSpacing$value: "normal"
+
+textDecoration$name: "text-decoration"
+textDecoration$options: ["none","underline","overline","line-through","blink","inherit"]
+textDecoration$value: "none"

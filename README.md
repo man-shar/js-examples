@@ -1,5 +1,11 @@
 Some examples of javascript I've written in the past for some of my stories. Descriptiove Readmes about each file and specific functions are inside each folder.
 
+## react-charting-tool
+
+This is a charting tool I made in React back in 2018 for my Bachelor's Thesis. It's based on Bret Victor's dynamic visualization demo and tried to explore how charts could be made using via drawing.
+
+It uses React for the front end and svg rendering and [Redux](https://github.com/reduxjs/react-redux) for state management.
+
 ## herd-immunity
 
 Code I wrote for the herd immunity model and animations here: https://tmsnrt.rs/3hiJKGS
